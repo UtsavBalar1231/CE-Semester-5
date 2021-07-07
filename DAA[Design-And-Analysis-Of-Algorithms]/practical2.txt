@@ -1,0 +1,5 @@
+practical 2 bubble sort students height
+
+a: same as question
+b: Use 10000 random numbers and create best case, worst case and average case
+to check time complexity
