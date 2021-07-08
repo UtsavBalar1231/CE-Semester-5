@@ -10,25 +10,24 @@
 
 // Function to sort Array using bubble sort algorithm
 void sort(int arr[], int n) {
-    bool isSorted = false; // Initially array is unsorted 
-    while (!isSorted) 
-    { 
-        isSorted = true; 
-        // Perform Bubble sort on odd indexed element 
-        for (int i=1; i<=n-2; i=i+2) 
-        { 
-            if (arr[i] > arr[i+1]) 
-             { 
-                swap(arr[i], arr[i+1]); 
-                isSorted = false; 
-              } 
-        } 
-        // Perform Bubble sort on even indexed element 
-        for (int i=0; i<=n-2; i=i+2) 
-        { 
-            if (arr[i] > arr[i+1]) 
-            {
-                swap(arr[i], arr[i+1]);
+    bool isSorted = false; // Initially array is unsorted
+    while (!isSorted) {
+        isSorted = true;
+        // Perform Bubble sort on odd indexed element
+        for (int i = 1; i <= n - 2; i = i + 2) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                isSorted = false;
+            }
+        }
+        // Perform Bubble sort on even indexed element
+        for (int i = 0; i <= n - 2; i = i + 2) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
                 isSorted = false;
             }
         }
@@ -47,7 +46,7 @@ int main(void) {
     clock_t t1, t2, t3;
     int start = 1, end, i, temp, r;
     printf("Enter the largest number for array: ");
-    scanf("%d", &end);
+    scanf("%d", & end);
     int size = end - start + 1;
     int arr[size];
 
