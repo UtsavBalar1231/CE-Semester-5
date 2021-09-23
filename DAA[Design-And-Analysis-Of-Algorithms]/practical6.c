@@ -1,77 +1,36 @@
 // Assembly line scheduling
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-// Prints a maximum set of activities that can be done by a single
-// person, one at a time.
-//  n   -->  Total number of activities
-//  s[] -->  An array that contains start time of all activities
-//  f[] -->  An array that contains finish time of all activities
-void printMaxActivities(int s[], int f[], int n)
+// Created macro for Random number generation
+#define randnum(min, max) ((rand() % (int)(((max) + 1) - (min))) + (min))
+
+void printActivities(int start[], int finish[], int n)
 {
-    int i, j;
+    int i = 0, j;
 
-    printf("Following activities are selected n");
+    printf("\nActivities selected: ");
+    printf("%d\t", i);
 
-    // The first activity always gets selected
-    i = 0;
-    printf("%d ", i);
-
-    // Consider rest of the activities
     for (j = 1; j < n; j++)
     {
-        // If this activity has start time greater than or
-        // equal to the finish time of previously selected
-        // activity, then select it
-        if (s[j] >= f[i])
+        if (start[j] >= finish[i])
         {
-            printf("%d ", j);
+            printf("%d\t", j);
             i = j;
         }
     }
 }
-// Created macro for Random number generation
-#define randnum(min, max) \
-    ((rand() % (int)(((max) + 1) - (min))) + (min))
 
 // Function to swap two numbers
-void swap(int *x, int *y)
+void swap(int array[], int i, int j)
 {
-    int temp = *x;
-    *x = *y;
-    *y = temp;
-}
-
-// Function to partition array and return the pivot element index
-int partition(int arr[], int start, int end)
-{
-    int pivot = arr[end];
-    int pindex = start - 1;
-    int i;
-
-    for (int i = start; i < end; i++)
-    {
-        if (arr[i] <= pivot)
-        {
-            pindex++;
-            swap(&arr[i], &arr[pindex]);
-        }
-    }
-    swap(&arr[pindex + 1], &arr[end]);
-
-    return pindex + 1;
-}
-
-// Function to sort an array using quicksort algorithm
-void quicksort(int arr[], int start, int end)
-{
-    if (start < end)
-    {
-        int pindex = partition(arr, start, end);
-
-        quicksort(arr, start, pindex - 1);
-        quicksort(arr, pindex + 1, end);
-    }
+    int temp = 0;
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
 }
 
 // Function to all the elements in an array
@@ -79,37 +38,64 @@ void printArr(int array[], int size)
 {
     for (int i = 0; i < size; ++i)
     {
-        printf("%d  ", array[i]);
+        printf("%d\t", array[i]);
     }
     printf("\n");
 }
 
 int main()
 {
-    int size = 50, i, temp = 0, r;
-    int *array;
-    array = (int *)calloc(sizeof(int) * size);
-    if (array == NULL)
+    int end = 10, i, temp = 0, r;
+    int *start_t, *finish_t;
+    int size = end - 1;
+
+    // Dynamic memory allocation for size of activities
+    start_t = malloc(sizeof(int) * size);
+    if (start_t == NULL)
     {
         printf("malloc of size %d failed!\n", size);
-        return 0;
-        exit(1);
+        return -1;
+    }
+    finish_t = malloc(sizeof(int) * size);
+    if (finish_t == NULL)
+    {
+        printf("malloc of size %d failed!\n", size);
+        return -1;
     }
 
     // To avoid repetition with each run
-    srand((unsigned int)time(NULL));
+    srand((unsigned int)time(0));
+
+    // Fill array with numbers in range (start, end)
+    for (int temp = 0, i = 1; temp < size; i++, temp++)
+        start_t[temp] = i;
 
     // Store all the random numbers in the array
     for (i = size - 1; i > 0; i--)
     {
         r = randnum(1, size);
+        swap(start_t, i, r);
     }
 
-    printf("\nUnosrted Start times: \t");
-    printf("\nUnsorted Finish times: \t");
-    printArr(array, size);
+    // Store all the random numbers in the array
+    for (i = size - 1; i > 0; i--)
+    {
+        r = randnum(1, size);
+        finish_t[i] = r;
+    }
 
-    quicksort(array, 0, size - 1);
+    printf("\nActivities: \t");
+    for (int j = 1; j < size + 1; j++)
+        printf("%d\t", j);
 
+    printf("\n\nStart times: \t");
+    printArr(start_t, size);
+    printf("Finish times: \t");
+    printArr(finish_t, size);
+
+    printActivities(start_t, finish_t, size);
+
+    free(start_t);
+    free(finish_t);
     return 0;
 }

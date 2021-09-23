@@ -28,7 +28,7 @@ int coin_change(int *d, int N, int n)
         for (j = 1; j < N + 1; j++)
         {
             if (i == 1 && j < d[i - 1])
-                c[i][j] = MAX;
+                c[i - 1][j] = MAX;
             else if (i == 1)
             {
                 c[i - 1][j] = (1 + c[i - 1][j - d[i - 1]]);
