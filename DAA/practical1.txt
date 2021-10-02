@@ -1,0 +1,29 @@
+2
+Using Recursion:
+Time Taken to execute: (0.000048 seconds).
+Using Iterative:
+Time Taken to execute: (0.000008 seconds).
+
+5
+Using Recursion:
+Time Taken to execute: (0.000008 seconds).
+Using Iterative:
+Time Taken to execute: (0.000028 seconds).
+
+10
+Using Recursion:
+Time Taken to execute: (0.000006 seconds).
+Using Iterative:
+Time Taken to execute: (0.000051 seconds).
+
+25
+Using Recursion:
+Time Taken to execute: (0.000031 seconds).
+Using Iterative:
+Time Taken to execute: (0.000010 seconds).
+
+50
+Using Recursion:
+Time Taken to execute: (0.000013 seconds).
+Using Iterative:
+Time Taken to execute: (0.000044 seconds).

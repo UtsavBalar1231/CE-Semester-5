@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Register Form</title>
+	<script>
+		function validate() {
+			var validname = /^[a-zA-Z]+$/;
+			var fname = document.forms["RegisterForm"]["firstname"].value;
+			if (fname === "") {
+				alert("First Name cannot be empty!");
+				return false;
+			} else if (!fname.match(validname)) {
+				alert("Enter Valid First Name!")
+				return false;
+			}
+
+			var lname = document.forms["RegisterForm"]["lastname"].value;
+			if (lname === "") {
+				alert("Last Name cannot be empty!");
+				return false;
+			} else if (!lname.match(validname)) {
+				alert("Enter Valid Last Name")
+				return false;
+			}
+
+			var fage = document.forms["RegisterForm"]["age"].value;
+			if (fage === "") {
+				alert("Age cannot be empty!")
+				return false;
+			} else if (fage < 18 && fage > 99) {
+				alert("Please Enter your correct age");
+				return false;
+			}
+
+			var em = document.forms["RegisterForm"]["Email"].value;
+			var atpos = em.indexOf("@gmail");
+			var dotpos = em.lastIndexOf(".");
+			if (em === "") {
+				alert("Email cannot be empty!")
+				return false;
+			} else if (atpos < 1 || dotpos - atpos < 2) {
+				alert("Please enter correct email ID (Use @gmail.com)");
+				return false;
+			}
+
+			var dobyear = (new Date(document.forms["RegisterForm"]["Date"].value)).getFullYear();
+			var currentyear = (new Date()).getFullYear();
+			var validateyear = currentyear - dobyear;
+			if (fage != validateyear) {
+				alert("Incorrect Date of Birth (Check your Age)");
+				return false;
+			}
+
+			var phoneno = /^\+?([6-9]{1})\)?([0-9]{9})$/;
+			var ph = document.forms["RegisterForm"]["phone"].value;
+			if (ph === "") {
+				alert("Phone number cannot be empty!");
+				return false;
+			}
+			if (!phoneno.test(ph)) {
+				alert("Please Enter a valid phone number");
+				return false;
+			}
+
+			var addr = document.forms["RegisterForm"]["address"].value;
+			if (addr === "") {
+				alert("Address must be filled out");
+				return false;
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<form name="RegisterForm" onsubmit="return validate()" method="post">
+		<table>
+			<tr>
+				<td>
+					<label>1. First Name</label>
+				</td>
+				<td>
+					<input type="text" name="firstname" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>2. Last Name</label>
+				</td>
+				<td>
+					<input type="text" name="lastname" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>3. Age</label>
+				</td>
+				<td>
+					<input type="number" name="age" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>4. Email </label>
+				</td>
+				<td>
+					<input type="email" name="Email" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>5. Date of Birth </label>
+				</td>
+				<td>
+					<input type="date" name="Date" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>6. Gender </label>
+				</td>
+				<td>
+					<input type="radio" value="Male" name="gender" checked /> Male
+					<input type="radio" value="Female" name="gender" /> Female
+					<input type="radio" value="Other" name="gender" /> Other
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>7. Choose your department </label>
+				</td>
+				<td>
+					<select>
+						<option value="Course">Course</option>
+						<option value="BCA">BCA</option>
+						<option value="BBA">BBA</option>
+						<option value="B.Tech" selected>B.Tech</option>
+						<option value="MBA">MBA</option>
+						<option value="MCA">MCA</option>
+						<option value="M.Tech">M.Tech</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>8. Mobile Number </label>
+				</td>
+				<td>
+					<input type="text" name="phone" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>9. Enter Address </label>
+				</td>
+				<td>
+					<textarea style="background-color:yellow" cols="80" rows="5" name="address"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">REGISTRATION</button>
+				</td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+</body>
+
+</html>
